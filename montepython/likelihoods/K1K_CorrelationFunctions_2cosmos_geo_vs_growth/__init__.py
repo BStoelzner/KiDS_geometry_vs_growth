@@ -653,7 +653,7 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
             D_z = np.zeros(self.nzbins)
             for zbin in xrange(self.nzbins):
 
-                param_name = 'D_z{:}_{:}'.format(zbin + 1, cosmo_index)
+                param_name = 'D_z{:}'.format(zbin + 1)
                 if param_name in data.mcmc_parameters:
                     D_z[zbin] = data.mcmc_parameters[param_name]['current'] * data.mcmc_parameters[param_name]['scale']
 
