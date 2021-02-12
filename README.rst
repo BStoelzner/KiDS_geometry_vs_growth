@@ -1,3 +1,22 @@
+Gaussian priors for MultiNest sampling:
+-------------------
+
+The standard method of putting a Gaussian prior on sampling parameters (i.e. adding a Gaussian likelihood) leads to an incorrect
+estimate of the evidence with MultiNest. This branch contains an implementation of a Gaussian prior in ``montepython/prior.py``
+(adapted from https://github.com/JohannesBuchner/MultiNest/blob/master/src/priors.f90).
+
+The mean and standard deviation of the Gaussian are defined in the ``.param`` file. For example:
+
+    data.parameters['h']         	= [0.68,     0.6,   0.8,   0.2, 1, 'cosmo', 'gaussian', 0.68, 0.1]
+
+puts a Gaussian prior on h with mu=0.68 and sigma=0.1. If we use
+
+    data.parameters['omega_cdm'] 	= [0.1120, 0.1, 0.2, 0.0016,1,   'cosmo']
+
+we assume a flat prior in the given parameter range.
+
+Note: At the moment the Gaussian prior only works with the MultiNest sampler, but it should be straightforward to implement in PolyChord as well.
+
 ==========================================================
 Monte Python 2cosmos, a modification of Monte Python,
 a Monte Carlo Markov Chain code (with CLASS!)
@@ -25,16 +44,16 @@ your own '2cosmos' likelihoods (refer also to the README of that likelihood).
 
 The code is under the MIT license. As an additional clause, when using the code
 in a scientific publication you are also required to cite ``A Bayesian quantification
-of consistency in correlated data sets`` in addition to the Monte Python v3.0 release 
-paper ``MontePython 3: boosted MCMC sampler and other features`` and the original release 
+of consistency in correlated data sets`` in addition to the Monte Python v3.0 release
+paper ``MontePython 3: boosted MCMC sampler and other features`` and the original release
 paper ``Conservative Constraints on Early Cosmology`` (see the tail of this document
 for the bibtex entries).
 
 IMPORTANT
 ---------
 We have only tested Monte Python's default Metropolis-
-Hastings sampler, the MultiNest and PolyChord samplers. If you want to use 
-the CosmoHammer sampler, please be aware of potentially occuring bugs (all 
+Hastings sampler, the MultiNest and PolyChord samplers. If you want to use
+the CosmoHammer sampler, please be aware of potentially occuring bugs (all
 modifications related to its 2cosmos sampling capabilities are included in the
 module).
 

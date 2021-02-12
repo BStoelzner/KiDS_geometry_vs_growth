@@ -585,7 +585,7 @@ class Data(object):
         """
         array = []
         # First obvious block is all cosmological parameters
-        array.append(len(self.get_mcmc_parameters(['varying', 'cosmo1'])) + len(self.get_mcmc_parameters(['varying', 'cosmo2'])))
+        array.append(len(self.get_mcmc_parameters(['varying', 'cosmo1'])) + len(self.get_mcmc_parameters(['varying', 'cosmo2'])) + len(self.get_mcmc_parameters(['varying', 'cosmo_shared'])))
         #array.append(len(self.get_mcmc_parameters(['varying', 'cosmo2'])))
         # Then, store all nuisance parameters
         nuisance = self.get_mcmc_parameters(['varying', 'nuisance'])
@@ -718,6 +718,7 @@ class Data(object):
         parameter_names = self.get_mcmc_parameters(['varying'])
         cosmo1_names = self.get_mcmc_parameters(['cosmo1'])
         cosmo2_names = self.get_mcmc_parameters(['cosmo2'])
+        cosmo_shared_names = self.get_mcmc_parameters(['cosmo_shared'])
 
         need_change = 0
 
@@ -730,6 +731,9 @@ class Data(object):
                     need_change += 1
 
             if elem in cosmo2_names:
+                if self.mcmc_parameters[elem]['current'] != new_step[i]:
+                    need_change += 1
+            if elem in cosmo_shared_names:
                 if self.mcmc_parameters[elem]['current'] != new_step[i]:
                     need_change += 1
 
@@ -793,6 +797,11 @@ class Data(object):
         for elem in self.get_mcmc_parameters(['cosmo1']):
             # Fill in the dictionnary with the current value of parameters
             self.cosmo1_arguments[elem[:-2]] = \
+                self.mcmc_parameters[elem]['current'] *\
+                self.mcmc_parameters[elem]['scale']
+        for elem in self.get_mcmc_parameters(['cosmo_shared']):
+            # Fill in the dictionnary with the current value of parameters
+            self.cosmo1_arguments[elem = \
                 self.mcmc_parameters[elem]['current'] *\
                 self.mcmc_parameters[elem]['scale']
 
@@ -929,7 +938,7 @@ class Data(object):
             elif elem == 'w0wa':
                 self.cosmo1_arguments['wa_fld'] = self.cosmo1_arguments[elem] - self.cosmo1_arguments['w0_fld']
                 del self.cosmo1_arguments[elem]
-                
+
             # Finally, deal with all the parameters ending with __i, where i is
             # an integer. Replace them all with their name without the trailing
             # double underscore, concatenated with each other. The test is
@@ -987,6 +996,11 @@ class Data(object):
         for elem in self.get_mcmc_parameters(['cosmo2']):
             # Fill in the dictionnary with the current value of parameters
             self.cosmo2_arguments[elem[:-2]] = \
+                self.mcmc_parameters[elem]['current'] *\
+                self.mcmc_parameters[elem]['scale']
+        for elem in self.get_mcmc_parameters(['cosmo_shared']):
+            # Fill in the dictionnary with the current value of parameters
+            self.cosmo2_arguments[elem = \
                 self.mcmc_parameters[elem]['current'] *\
                 self.mcmc_parameters[elem]['scale']
 
@@ -1329,7 +1343,7 @@ class Parameter(dict):
 
         self['initial'] = array[0:4]
         self['scale'] = array[4]
-        self['role'] = array[-1]
+        self['role'] = array[5]
         self['tex_name'] = io_mp.get_tex_name(key)
         if array[3] == 0:
             self['status'] = 'fixed'

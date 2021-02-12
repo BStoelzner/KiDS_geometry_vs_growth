@@ -115,10 +115,10 @@ def initialise(cosmo1, cosmo2, data, command_line):
     # Check that all the priors are flat and that all the parameters are bound
     is_flat, is_bound = sampler.check_flat_bound_priors(
         data.mcmc_parameters, varying_param_names)
-    if not is_flat:
-        raise io_mp.ConfigurationError(
-            'Nested Sampling with MultiNest is only possible with flat ' +
-            'priors. Sorry!')
+    # if not is_flat:
+    #     raise io_mp.ConfigurationError(
+    #         'Nested Sampling with MultiNest is only possible with flat ' +
+    #         'priors. Sorry!')
     if not is_bound:
         raise io_mp.ConfigurationError(
             'Nested Sampling with MultiNest is only possible for bound ' +
