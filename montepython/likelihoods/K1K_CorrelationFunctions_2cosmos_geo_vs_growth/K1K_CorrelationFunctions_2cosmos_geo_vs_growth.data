@@ -78,8 +78,8 @@ K1K_CorrelationFunctions_2cosmos.type_redshift_interp = 'cubic'
 # set up the scale cuts to use in the following lines to construct two mutually
 K1K_CorrelationFunctions_2cosmos.keep_ang_xiP1  = '0.5 300.0'
 K1K_CorrelationFunctions_2cosmos.keep_ang_xiM1  = '4.0 300.0'
-K1K_CorrelationFunctions_2cosmos.keep_ang_xiP2  = '0.5 300.0'
-K1K_CorrelationFunctions_2cosmos.keep_ang_xiM2  = '4.0 300.0'
+#K1K_CorrelationFunctions_2cosmos.keep_ang_xiP2  = '0.5 300.0'
+#K1K_CorrelationFunctions_2cosmos.keep_ang_xiM2  = '4.0 300.0'
 
 
 # we keep all tomo pairs in data set1 except for the following ones:

@@ -145,44 +145,44 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
                                             'cosebis/libxipm_binned.so'))
         self.xim_binned_module1.setup(dict_to_datablock(self.config_xim_binned1))
 
-        self.config_xip_binned2 = {'xip_binned2': { 'output_section_name' : self.xip_output_section_name,
-                                          'input_section_name' : self.xip_input_section_name,
-                                          'type' : self.xip_type,
-                                          'theta_min' : self.xip_theta_min,
-                                          'theta_max' : self.xip_theta_max,
-                                          'nTheta' : self.xip_nTheta,
-                                          'weighted_binning' : self.xip_weighted_binning,
-                                          'InputNpair' : self.xip_InputNpair,
-                                          'InputNpair_suffix' : self.xip_InputNpair_suffix,
-                                          'Column_theta' : self.xip_Column_theta,
-                                          'Column_Npair' : self.xip_Column_Npair,
-                                          'nBins_in' : self.xip_nBins_in,
-                                          'add_2D_cterm' : self.xip_add_2D_cterm,
-                                          'add_c_term' :self.xip_add_c_term}}
-        self.xip_binned_module2 = cosmosis.runtime.module.Module(module_name='xip_binned2',
-                                            file_path=os.path.join(self.kcap_directory,
-                                            'cosebis/libxipm_binned.so'))
+        # self.config_xip_binned2 = {'xip_binned2': { 'output_section_name' : self.xip_output_section_name,
+        #                                   'input_section_name' : self.xip_input_section_name,
+        #                                   'type' : self.xip_type,
+        #                                   'theta_min' : self.xip_theta_min,
+        #                                   'theta_max' : self.xip_theta_max,
+        #                                   'nTheta' : self.xip_nTheta,
+        #                                   'weighted_binning' : self.xip_weighted_binning,
+        #                                   'InputNpair' : self.xip_InputNpair,
+        #                                   'InputNpair_suffix' : self.xip_InputNpair_suffix,
+        #                                   'Column_theta' : self.xip_Column_theta,
+        #                                   'Column_Npair' : self.xip_Column_Npair,
+        #                                   'nBins_in' : self.xip_nBins_in,
+        #                                   'add_2D_cterm' : self.xip_add_2D_cterm,
+        #                                   'add_c_term' :self.xip_add_c_term}}
+        # self.xip_binned_module2 = cosmosis.runtime.module.Module(module_name='xip_binned2',
+        #                                     file_path=os.path.join(self.kcap_directory,
+        #                                     'cosebis/libxipm_binned.so'))
 
-        self.xip_binned_module2.setup(dict_to_datablock(self.config_xip_binned2))
-
-        self.config_xim_binned2 = {'xim_binned2': { 'output_section_name' : self.xim_output_section_name,
-                                          'input_section_name' : self.xim_input_section_name,
-                                          'type' : self.xim_type,
-                                          'theta_min' : self.xim_theta_min,
-                                          'theta_max' : self.xim_theta_max,
-                                          'nTheta' : self.xim_nTheta,
-                                          'weighted_binning' : self.xim_weighted_binning,
-                                          'InputNpair' : self.xim_InputNpair,
-                                          'InputNpair_suffix' : self.xim_InputNpair_suffix,
-                                          'Column_theta' : self.xim_Column_theta,
-                                          'Column_Npair' : self.xim_Column_Npair,
-                                          'nBins_in' : self.xim_nBins_in,
-                                          'add_2D_cterm' : self.xim_add_2D_cterm,
-                                          'add_c_term' :self.xim_add_c_term}}
-        self.xim_binned_module2 = cosmosis.runtime.module.Module(module_name='xim_binned2',
-                                            file_path=os.path.join(self.kcap_directory,
-                                            'cosebis/libxipm_binned.so'))
-        self.xim_binned_module2.setup(dict_to_datablock(self.config_xim_binned2))
+        # self.xip_binned_module2.setup(dict_to_datablock(self.config_xip_binned2))
+        #
+        # self.config_xim_binned2 = {'xim_binned2': { 'output_section_name' : self.xim_output_section_name,
+        #                                   'input_section_name' : self.xim_input_section_name,
+        #                                   'type' : self.xim_type,
+        #                                   'theta_min' : self.xim_theta_min,
+        #                                   'theta_max' : self.xim_theta_max,
+        #                                   'nTheta' : self.xim_nTheta,
+        #                                   'weighted_binning' : self.xim_weighted_binning,
+        #                                   'InputNpair' : self.xim_InputNpair,
+        #                                   'InputNpair_suffix' : self.xim_InputNpair_suffix,
+        #                                   'Column_theta' : self.xim_Column_theta,
+        #                                   'Column_Npair' : self.xim_Column_Npair,
+        #                                   'nBins_in' : self.xim_nBins_in,
+        #                                   'add_2D_cterm' : self.xim_add_2D_cterm,
+        #                                   'add_c_term' :self.xim_add_c_term}}
+        # self.xim_binned_module2 = cosmosis.runtime.module.Module(module_name='xim_binned2',
+        #                                     file_path=os.path.join(self.kcap_directory,
+        #                                     'cosebis/libxipm_binned.so'))
+        # self.xim_binned_module2.setup(dict_to_datablock(self.config_xim_binned2))
 
         # set up KCAP's scale cuts module here:
         # Initialize the scale cuts module from CosmoSIS:
@@ -217,52 +217,53 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
         # attribute
         self.scale_cuts_module1.setup(dict_to_datablock(self.config_scale_cuts1))
 
-        self.config_scale_cuts2= {'scale_cuts2': {'data_and_covariance_fits_filename': os.path.join(self.data_directory, self.data_file),
-                                                 #'scale_cuts_option': self.scale_cuts_option1,
-                                                 'use_stats': 'xiP xiM',
-                                                 'xi_plus_extension_name' : 'xiP',
-                                                 'xi_minus_extension_name' : 'xiM',
-                                                 'xi_plus_section_name' : 'shear_xi_plus_binned',
-                                                 'xi_minus_section_name' : 'shear_xi_minus_binned',
-                                                 'cosebis_section_name' : 'cosebis',
-                                                 'simulate' : False,
-                                                 'simulate_with_noise' : True,
-                                                 'output_section_name': 'scale_cuts_output'}}
+        # self.config_scale_cuts2= {'scale_cuts2': {'data_and_covariance_fits_filename': os.path.join(self.data_directory, self.data_file),
+        #                                          #'scale_cuts_option': self.scale_cuts_option1,
+        #                                          'use_stats': 'xiP xiM',
+        #                                          'xi_plus_extension_name' : 'xiP',
+        #                                          'xi_minus_extension_name' : 'xiM',
+        #                                          'xi_plus_section_name' : 'shear_xi_plus_binned',
+        #                                          'xi_minus_section_name' : 'shear_xi_minus_binned',
+        #                                          'cosebis_section_name' : 'cosebis',
+        #                                          'simulate' : False,
+        #                                          'simulate_with_noise' : True,
+        #                                          'output_section_name': 'scale_cuts_output'}}
 
         # for now we only look for these two keywords:
-        if hasattr(self, 'keep_ang_xiP2'):
-            self.config_scale_cuts2['scale_cuts2'].update({'keep_ang_xiP': self.keep_ang_xiP2})
-        if hasattr(self, 'cut_pair_xiP2'):
-            self.config_scale_cuts2['scale_cuts2'].update({'cut_pair_xiP': self.cut_pair_xiP2})
-        if hasattr(self, 'keep_ang_xiM2'):
-            self.config_scale_cuts2['scale_cuts2'].update({'keep_ang_xiM': self.keep_ang_xiM2})
-        if hasattr(self, 'cut_pair_xiM2'):
-            self.config_scale_cuts2['scale_cuts2'].update({'cut_pair_xiM': self.cut_pair_xiM2})
+        # if hasattr(self, 'keep_ang_xiP2'):
+        #     self.config_scale_cuts2['scale_cuts2'].update({'keep_ang_xiP': self.keep_ang_xiP2})
+        # if hasattr(self, 'cut_pair_xiP2'):
+        #     self.config_scale_cuts2['scale_cuts2'].update({'cut_pair_xiP': self.cut_pair_xiP2})
+        # if hasattr(self, 'keep_ang_xiM2'):
+        #     self.config_scale_cuts2['scale_cuts2'].update({'keep_ang_xiM': self.keep_ang_xiM2})
+        # if hasattr(self, 'cut_pair_xiM2'):
+        #     self.config_scale_cuts2['scale_cuts2'].update({'cut_pair_xiM': self.cut_pair_xiM2})
 
         # import scale_cuts as CosmoSIS module
-        self.scale_cuts_module2 = cosmosis.runtime.module.Module(module_name='scale_cuts2',
-                                            file_path=os.path.join(self.kcap_directory,
-                                            'modules/scale_cuts/scale_cuts.py'))
+        # self.scale_cuts_module2 = cosmosis.runtime.module.Module(module_name='scale_cuts2',
+        #                                     file_path=os.path.join(self.kcap_directory,
+        #                                     'modules/scale_cuts/scale_cuts.py'))
 
         # during set up the module stores the cut data vec and covmat in its data
         # attribute
-        self.scale_cuts_module2.setup(dict_to_datablock(self.config_scale_cuts2))
+        # self.scale_cuts_module2.setup(dict_to_datablock(self.config_scale_cuts2))
 
         # this works now:
-        self.data_vec1 = self.scale_cuts_module1.data['data']
+        self.data_vec = self.scale_cuts_module1.data['data']
+        covmat = self.scale_cuts_module1.data['covariance']
         #print(self.cosebis_obs1.shape)
         # we don't need the covmat_block
         #covmat_block1 = self.scale_cuts_module1.data['covariance']
         #print(covmat_block1.shape)
 
-        self.data_vec2 = self.scale_cuts_module2.data['data']
+        # self.data_vec2 = self.scale_cuts_module2.data['data']
         #print(self.cosebis_obs2.shape)
         # we don't need the covmat_block
         #covmat_block2 = self.scale_cuts_module2.data['covariance']
         #print(covmat_block2.shape)
 
         # concatenate to one data vector:
-        self.data_vec = np.concatenate((self.data_vec1, self.data_vec2))
+        # self.data_vec = np.concatenate((self.data_vec1, self.data_vec2))
         #print(self.cosebis_obs.shape)
 
         # the approach below does NOT work, as we would be missing the cross blocks!!!
@@ -286,12 +287,13 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
         # instead we infer a masking array by comparing the uncut data vector
         # to the cut data vectors and apply the mask then to a stacked block
         # matrix for which each block consists of an uncut covmat
-        mask1 = self.get_mask(data_vec_uncut, self.data_vec1)
-        mask2 = self.get_mask(data_vec_uncut, self.data_vec2)
-        mask_indices = np.where(np.concatenate((mask1, mask2)) == 1)[0]
-
-        covmat = np.bmat([[covmat_uncut, covmat_uncut],[covmat_uncut, covmat_uncut]])
-        covmat = covmat[np.ix_(mask_indices, mask_indices)]
+        # mask1 = self.get_mask(data_vec_uncut, self.data_vec)
+        # mask2 = self.get_mask(data_vec_uncut, self.data_vec2)
+        # mask_indices = np.where(np.concatenate((mask1, mask2)) == 1)[0]
+        # mask_indices = np.where(np.concatenate(mask1) == 1)[0]
+        # covmat = covmat_uncut[np.ix_(mask_indices, mask_indices)]
+        # covmat = np.bmat([[covmat_uncut, covmat_uncut],[covmat_uncut, covmat_uncut]])
+        # covmat = covmat[np.ix_(mask_indices, mask_indices)]
         #print(covmat.shape)
 
         # precompute Cholesky transform for chi^2 calculation:
@@ -808,29 +810,37 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
         self.theory_module.execute(datablock)
         delta_c = data.mcmc_parameters['delta_c']['current'] * data.mcmc_parameters['delta_c']['scale']
         # TODO: this is not the most elegant way...
-        if cosmo_index == 1:
-            # silence the scale_cuts module
-            block_print()
-            # delta_c = data.mcmc_parameters['delta_c_1']['current'] * data.mcmc_parameters['delta_c_1']['scale']
-            datablock['shear_c_bias','delta_c'] = delta_c
-            self.xip_binned_module1.execute(datablock)
-            self.xim_binned_module1.execute(datablock)
-            self.scale_cuts_module1.execute(datablock)
-            enable_print()
-            theory_vec = np.asarray(datablock['scale_cuts_output', 'theory'])
-        # catch exception of second vector being empty (e.g. when reducing 2cosmos to 1cosmo)
-        elif cosmo_index == 2 and len(self.data_vec2) != 0:
-            # silence the scale_cuts module
-            block_print()
-            # delta_c = data.mcmc_parameters['delta_c_2']['current'] * data.mcmc_parameters['delta_c_2']['scale']
-            datablock['shear_c_bias','delta_c'] = delta_c
-            self.xip_binned_module2.execute(datablock)
-            self.xim_binned_module2.execute(datablock)
-            self.scale_cuts_module2.execute(datablock)
-            enable_print()
-            theory_vec = np.asarray(datablock['scale_cuts_output', 'theory'])
-        else:
-            theory_vec = np.zeros(0)
+        block_print()
+        # delta_c = data.mcmc_parameters['delta_c_1']['current'] * data.mcmc_parameters['delta_c_1']['scale']
+        datablock['shear_c_bias','delta_c'] = delta_c
+        self.xip_binned_module1.execute(datablock)
+        self.xim_binned_module1.execute(datablock)
+        self.scale_cuts_module1.execute(datablock)
+        enable_print()
+        theory_vec = np.asarray(datablock['scale_cuts_output', 'theory'])
+        # if cosmo_index == 1:
+        #     # silence the scale_cuts module
+        #     block_print()
+        #     # delta_c = data.mcmc_parameters['delta_c_1']['current'] * data.mcmc_parameters['delta_c_1']['scale']
+        #     datablock['shear_c_bias','delta_c'] = delta_c
+        #     self.xip_binned_module1.execute(datablock)
+        #     self.xim_binned_module1.execute(datablock)
+        #     self.scale_cuts_module1.execute(datablock)
+        #     enable_print()
+        #     theory_vec = np.asarray(datablock['scale_cuts_output', 'theory'])
+        # # catch exception of second vector being empty (e.g. when reducing 2cosmos to 1cosmo)
+        # elif cosmo_index == 2 and len(self.data_vec2) != 0:
+        #     # silence the scale_cuts module
+        #     block_print()
+        #     # delta_c = data.mcmc_parameters['delta_c_2']['current'] * data.mcmc_parameters['delta_c_2']['scale']
+        #     datablock['shear_c_bias','delta_c'] = delta_c
+        #     self.xip_binned_module2.execute(datablock)
+        #     self.xim_binned_module2.execute(datablock)
+        #     self.scale_cuts_module2.execute(datablock)
+        #     enable_print()
+        #     theory_vec = np.asarray(datablock['scale_cuts_output', 'theory'])
+        # else:
+        #     theory_vec = np.zeros(0)
         return theory_vec
 
     def cosmo_calculations(self, cosmo, cosmo_pk, data, cosmo_index=1, cosmo_index_pk=2):

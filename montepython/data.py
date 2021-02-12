@@ -810,6 +810,18 @@ class Data(object):
         # The try: except: syntax ensures that the first call
         for elem in self.get_mcmc_parameters(['cosmo1']):
             # infer h from Omega_Lambda and delete Omega_Lambda
+            if elem == 'S_8':
+                h = self.cosmo_arguments['h']
+                # infer sigma8 from S_8, h, omega_b, omega_cdm, and omega_nu (assuming one standard massive neutrino and omega_nu=m_nu/93.14)
+                omega_b = self.cosmo_arguments['omega_b']
+                omega_cdm = self.cosmo_arguments['omega_cdm']
+                #
+                try:
+                    omega_nu = self.cosmo_arguments['m_ncdm'] / 93.14
+                except:
+                    omega_nu = 0.
+                self.cosmo_arguments['sigma8'] = self.cosmo_arguments['S_8'] * math.sqrt((0.3*h**2) / (omega_b+omega_cdm+omega_nu))
+                del self.cosmo_arguments[elem]
             if elem == 'Omega_Lambda':
                 omega_b = self.cosmo1_arguments['omega_b']
                 omega_cdm = self.cosmo1_arguments['omega_cdm']
