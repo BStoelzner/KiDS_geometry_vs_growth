@@ -342,7 +342,6 @@ class Data(object):
 
         if (os.path.exists(command_line.folder) and
                 not os.path.exists(log_param)):
-            if command_line.param is not None:
                 warnings.warn(
                     "Detecting empty folder, logging the parameter file")
                 io_mp.log_parameters(self, command_line)
@@ -640,7 +639,7 @@ class Data(object):
                 raise io_mp.ConfigurationError(
                     "The length of the over_sampling field should be"
                     " equal to the number of blocks (one for cosmological "
-                    "parameters, plus one for each likelihood with "
+                    "parameters, plus one for each liK1K_CorrelationFunctions_2cosmos.kcap_directory = '/share/splinter/stolzner/kids/kcap2'kelihood with "
                     "nuisance parameters)")
 
         # Create a list of indices corresponding of the oversampling strategy
@@ -801,27 +800,28 @@ class Data(object):
                 self.mcmc_parameters[elem]['scale']
         for elem in self.get_mcmc_parameters(['cosmo_shared']):
             # Fill in the dictionnary with the current value of parameters
-            self.cosmo1_arguments[elem = \
+            self.cosmo1_arguments[elem] = \
                 self.mcmc_parameters[elem]['current'] *\
                 self.mcmc_parameters[elem]['scale']
 
         # For all elements in the cosmological parameters from the mcmc list,
         # translate any-one that is not directly a CLASS parameter into one.
         # The try: except: syntax ensures that the first call
-        for elem in self.get_mcmc_parameters(['cosmo1']):
+        for elem_ in self.get_mcmc_parameters(['cosmo1']):
+            elem = elem_[:-2]
             # infer h from Omega_Lambda and delete Omega_Lambda
             if elem == 'S_8':
-                h = self.cosmo_arguments['h']
+                h = self.cosmo1_arguments['h']
                 # infer sigma8 from S_8, h, omega_b, omega_cdm, and omega_nu (assuming one standard massive neutrino and omega_nu=m_nu/93.14)
-                omega_b = self.cosmo_arguments['omega_b']
-                omega_cdm = self.cosmo_arguments['omega_cdm']
+                omega_b = self.cosmo1_arguments['omega_b']
+                omega_cdm = self.cosmo1_arguments['omega_cdm']
                 #
                 try:
-                    omega_nu = self.cosmo_arguments['m_ncdm'] / 93.14
+                    omega_nu = self.cosmo1_arguments['m_ncdm'] / 93.14
                 except:
                     omega_nu = 0.
-                self.cosmo_arguments['sigma8'] = self.cosmo_arguments['S_8'] * math.sqrt((0.3*h**2) / (omega_b+omega_cdm+omega_nu))
-                del self.cosmo_arguments[elem]
+                self.cosmo1_arguments['sigma8'] = self.cosmo1_arguments['S_8'] * math.sqrt((0.3*h**2) / (omega_b+omega_cdm+omega_nu))
+                del self.cosmo1_arguments[elem]
             if elem == 'Omega_Lambda':
                 omega_b = self.cosmo1_arguments['omega_b']
                 omega_cdm = self.cosmo1_arguments['omega_cdm']
@@ -1012,14 +1012,27 @@ class Data(object):
                 self.mcmc_parameters[elem]['scale']
         for elem in self.get_mcmc_parameters(['cosmo_shared']):
             # Fill in the dictionnary with the current value of parameters
-            self.cosmo2_arguments[elem = \
+            self.cosmo2_arguments[elem] = \
                 self.mcmc_parameters[elem]['current'] *\
                 self.mcmc_parameters[elem]['scale']
 
         # For all elements in the cosmological parameters from the mcmc list,
         # translate any-one that is not directly a CLASS parameter into one.
         # The try: except: syntax ensures that the first call
-        for elem in self.get_mcmc_parameters(['cosmo2']):
+        for elem_ in self.get_mcmc_parameters(['cosmo2']):
+            elem = elem_[:-2]
+            if elem == 'S_8':
+                h = self.cosmo2_arguments['h']
+                # infer sigma8 from S_8, h, omega_b, omega_cdm, and omega_nu (assuming one standard massive neutrino and omega_nu=m_nu/93.14)
+                omega_b = self.cosmo2_arguments['omega_b']
+                omega_cdm = self.cosmo2_arguments['omega_cdm']
+                #
+                try:
+                    omega_nu = self.cosmo2_arguments['m_ncdm'] / 93.14
+                except:
+                    omega_nu = 0.
+                self.cosmo2_arguments['sigma8'] = self.cosmo2_arguments['S_8'] * math.sqrt((0.3*h**2) / (omega_b+omega_cdm+omega_nu))
+                del self.cosmo2_arguments[elem]
             # infer h from Omega_Lambda and delete Omega_Lambda
             if elem == 'Omega_Lambda':
                 omega_b = self.cosmo2_arguments['omega_b']

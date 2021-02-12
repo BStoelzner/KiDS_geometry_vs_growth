@@ -29,11 +29,11 @@
 ## DATA LOCATION ##
 
 # set the path to the main data-folder:
-K1K_CorrelationFunctions_2cosmos_geo_vs_growth.data_directory = '/your/path/to/KiDS-1000_DATA_RELEASE/'
+K1K_CorrelationFunctions_2cosmos_geo_vs_growth.data_directory = '/share/splinter/stolzner/kids/montepython_public/data/K1K/'
 
 # set the path to the main folder of KCAP:
 # (this is required for importing the cosebis and scale_cuts modules )
-K1K_CorrelationFunctions_2cosmos_geo_vs_growth.kcap_directory = '/your/path/to/KCAP/'
+K1K_CorrelationFunctions_2cosmos_geo_vs_growth.kcap_directory = '/share/splinter/stolzner/kids/kcap2'
 
 # for loading of files:
 
