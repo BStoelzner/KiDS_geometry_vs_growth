@@ -1,7 +1,6 @@
 #------Experiments to test (separated with commas)-----
 
-data.experiments=['K1K_CorrelationFunctions_2cosmos_geo_vs_growth', 
-                  'bao_boss', 'bao_fs_boss_dr12']
+data.experiments=['K1K_CorrelationFunctions_2cosmos_geo_vs_growth', 'bao_boss', 'bao_fs_boss_dr12']
 
 #------ Settings for the over-sampling. The first element will always be set to
 # 1, for it is the sampling of the cosmological parameters. The other numbers
@@ -41,7 +40,7 @@ data.parameters['A_IA'] = [1.0, -6.0, 6.0, 1.0, 1, 'nuisance']
 # parameters for baryon feedback with 'hmcode':
 #data.parameters['c_min']   = [2.6,    2.,     3.13,    1.,     1, 'cosmo_shared']
 
-### Delta-z parameters ### 
+### Delta-z parameters ###
 data.parameters['D_z1'] = [ 0.,       -5., 5., 0.01, 1, 'nuisance', 'gaussian', 0., 1.0]
 data.parameters['D_z2'] = [ 0.181,    -5., 5., 0.01, 1, 'nuisance', 'gaussian', 0.181, 1.0]
 data.parameters['D_z3'] = [ 1.110,    -5., 5., 0.01, 1, 'nuisance', 'gaussian', 1.110, 1.0]
@@ -52,10 +51,10 @@ data.parameters['delta_c'] = [ 0,       -3.75e-7, 3.75e-7, 1e-8, 1, 'nuisance', 
 
 # Derived parameters
 
-data.parameters['Omega_m_1']      = [1, None, None, 0, 1, 'derived']  
-data.parameters['sigma8_1']       = [1, None, None, 0, 1, 'derived']  
-data.parameters['Omega_m_2']      = [1, None, None, 0, 1, 'derived']  
-data.parameters['sigma8_2']       = [1, None, None, 0, 1, 'derived']  
+data.parameters['Omega_m_1']      = [1, None, None, 0, 1, 'derived']
+data.parameters['sigma8_1']       = [1, None, None, 0, 1, 'derived']
+data.parameters['Omega_m_2']      = [1, None, None, 0, 1, 'derived']
+data.parameters['sigma8_2']       = [1, None, None, 0, 1, 'derived']
 
 # Other cosmo parameters (fixed parameters, precision parameters, etc.)
 

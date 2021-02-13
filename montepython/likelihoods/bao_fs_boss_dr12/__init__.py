@@ -4,7 +4,7 @@ import warnings
 import montepython.io_mp as io_mp
 from montepython.likelihood_class import Likelihood
 import scipy.constants as conts
-import math 
+import math
 from scipy import special
 from scipy.linalg import cholesky, solve_triangular
 
@@ -18,14 +18,14 @@ class bao_fs_boss_dr12(Likelihood):
 
         # needed arguments in order to get sigma_8(z) up to z=1 with correct precision
         if 'K1K_CorrelationFunctions_2cosmos_geo_vs_growth' in data.experiments:
-	     print('Conflict!- using kids P_K')
+            print('Conflict!- using kids P_K')
         else:
-             self.need_cosmo1_arguments(data, {'output': 'mPk'})
-             self.need_cosmo1_arguments(data, {'P_k_max_h/Mpc': self.k_max})
-             self.need_cosmo2_arguments(data, {'output': 'mPk'})
-             self.need_cosmo2_arguments(data, {'P_k_max_h/Mpc': self.k_max})
-             self.need_cosmo1_arguments(data, {'z_max_pk': self.k_max})
-             self.need_cosmo2_arguments(data, {'z_max_pk': self.k_max})
+            self.need_cosmo1_arguments(data, {'output': 'mPk'})
+            self.need_cosmo1_arguments(data, {'P_k_max_h/Mpc': self.k_max})
+            self.need_cosmo2_arguments(data, {'output': 'mPk'})
+            self.need_cosmo2_arguments(data, {'P_k_max_h/Mpc': self.k_max})
+            self.need_cosmo1_arguments(data, {'z_max_pk': self.k_max})
+            self.need_cosmo2_arguments(data, {'z_max_pk': self.k_max})
 
         # are there conflicting experiments?
         if 'bao_boss_aniso' in data.experiments:
