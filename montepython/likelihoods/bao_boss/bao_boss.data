@@ -1,0 +1,5 @@
+# BAO data
+bao_boss.data_directory      = data.path['data']
+bao_boss.file                = 'bao_2014.txt'
+bao_boss.exclude             = []
+#bao_boss.use_nuisance = ['A_IA_1', 'dc_1', 'Ac_1', 'A_IA_2', 'dc_2', 'Ac_2', 'D_z1_1', 'D_z2_1', 'D_z3_1', 'D_z4_1', 'D_z5_1', 'D_z1_2', 'D_z2_2', 'D_z3_2', 'D_z4_2', 'D_z5_2']
