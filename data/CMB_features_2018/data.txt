@@ -1,0 +1,12 @@
+# quantity, value, type (ln(10^10A_s)=1, ns=2, R=3)
+# For a given type, the quantity correspond to the listed
+# possibilities above
+#
+# ln(10^10A_s) Planck 2018. 1807.06209
+ln(10^10A_s)   3.045    1
+#
+# ns, Planck 2018. 1807.06209
+ns    0.9649    2
+#
+# CMB Shift Parameter R, Ruiz and Huterer 1410.5832
+theta 1.0409    3

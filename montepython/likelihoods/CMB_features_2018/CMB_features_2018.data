@@ -1,5 +1,5 @@
 # CMB_features_2018
 # By Jaime Ruiz-Zapatero Jan 2019
 CMB_features_2018.data_directory      = data.path['data']
-CMB_features_2018.data_file           = 'CMB_features_2018_data'
-CMB_features_2018.cov_file            = 'CMB_features_2018_cov'
+CMB_features_2018.data_file           = 'CMB_features_2018/data.txt'
+CMB_features_2018.cov_file            = 'CMB_features_2018/cov.txt'
