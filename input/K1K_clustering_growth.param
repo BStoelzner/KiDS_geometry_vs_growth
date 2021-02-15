@@ -38,7 +38,7 @@ data.parameters['h_2']         	  = [0.6898,  0.64,   0.82,  0.0065,    1, 'cosm
 data.parameters['A_IA'] = [1.0, -6.0, 6.0, 1.0, 1, 'nuisance']
 
 # parameters for baryon feedback with 'hmcode':
-#data.parameters['c_min']   = [2.6,    2.,     3.13,    1.,     1, 'cosmo_shared']
+data.parameters['c_min']   = [2.6,    2.,     3.13,    1.,     1, 'cosmo_shared']
 
 ### Delta-z parameters ###
 data.parameters['D_z1'] = [ 0.,       -5., 5., 0.01, 1, 'nuisance', 'gaussian', 0., 1.0]

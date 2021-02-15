@@ -80,8 +80,8 @@ class CMB_features_2018(Likelihood):
             prediction = np.append(prediction, float(theo))
 
 	#print prediction
-	vec = self.data - prediction
-    	if np.isinf(vec).any() or np.isnan(vec).any():
+        vec = self.data - prediction
+        if np.isinf(vec).any() or np.isnan(vec).any():
             chi2 = 2e12
         else:
             # don't invert that matrix...
