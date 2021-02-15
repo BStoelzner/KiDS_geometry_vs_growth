@@ -91,22 +91,21 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
         # max(self.z) and for k up to k_max
         # Technically we shouldn't need cosmo 2 to get Pk but might give a bug
         self.need_cosmo1_arguments(data, {'output': 'mPk', 'P_k_max_h/Mpc': self.k_max_h_by_Mpc})
-        #self.need_cosmo2_arguments(data, {'output': 'mPk', 'P_k_max_h/Mpc': self.k_max_h_by_Mpc})
+        self.need_cosmo2_arguments(data, {'output': 'mPk', 'P_k_max_h/Mpc': self.k_max_h_by_Mpc})
         self.need_cosmo1_arguments(data, {'nonlinear_min_k_max': self.nonlinear_min_k_max})
-        #self.need_cosmo2_arguments(data, {'nonlinear_min_k_max': self.nonlinear_min_k_max})
-
+        self.need_cosmo2_arguments(data, {'nonlinear_min_k_max': self.nonlinear_min_k_max})
         ## Compute non-linear power spectrum if requested
         # it seems like HMcode needs the full argument to work...
         if self.method_non_linear_Pk in ['halofit', 'HALOFIT', 'Halofit', 'hmcode', 'Hmcode', 'HMcode', 'HMCODE']:
             self.need_cosmo1_arguments(data, {'non linear': self.method_non_linear_Pk})
-            #self.need_cosmo2_arguments(data, {'non linear': self.method_non_linear_Pk})
+            self.need_cosmo2_arguments(data, {'non linear': self.method_non_linear_Pk})
             print('Using {:} to obtain the non-linear P(k, z)!'.format(self.method_non_linear_Pk))
         else:
             print('Only using the linear P(k, z) for ALL calculations \n (check keywords for "method_non_linear_Pk").')
 
         # set up array of ells for Cl integrations:
         self.ells = np.logspace(np.log10(self.ell_min), np.log10(self.ell_max), self.nells)
-
+        
         self.config_xip_binned1 = {'xip_binned1': { 'output_section_name' : self.xip_output_section_name,
                                           'input_section_name' : self.xip_input_section_name,
                                           'type' : self.xip_type,
@@ -120,7 +119,8 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
                                           'Column_Npair' : self.xip_Column_Npair,
                                           'nBins_in' : self.xip_nBins_in,
                                           'add_2D_cterm' : self.xip_add_2D_cterm,
-                                          'add_c_term' :self.xip_add_c_term}}
+                                          'add_c_term' :self.xip_add_c_term,
+                                          }}
         self.xip_binned_module1 = cosmosis.runtime.module.Module(module_name='xip_binned1',
                                             file_path=os.path.join(self.kcap_directory,
                                             'cosebis/libxipm_binned.so'))
@@ -140,7 +140,8 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
                                           'Column_Npair' : self.xim_Column_Npair,
                                           'nBins_in' : self.xim_nBins_in,
                                           'add_2D_cterm' : self.xim_add_2D_cterm,
-                                          'add_c_term' :self.xim_add_c_term}}
+                                          'add_c_term' :self.xim_add_c_term,
+                                          }}
         self.xim_binned_module1 = cosmosis.runtime.module.Module(module_name='xim_binned1',
                                             file_path=os.path.join(self.kcap_directory,
                                             'cosebis/libxipm_binned.so'))
@@ -197,7 +198,8 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
                                                  'cosebis_section_name' : 'cosebis',
                                                  'simulate' : False,
                                                  'simulate_with_noise' : True,
-                                                 'output_section_name': 'scale_cuts_output'}}
+                                                 'output_section_name': 'scale_cuts_output',
+                                                 }}
 
         # for now we only look for these two keywords:
         if hasattr(self, 'keep_ang_xiP1'):
@@ -279,7 +281,7 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
         else:
             covmat = covmat_block1
         '''
-
+        
         # Read dn_dz from data FITS file:
         #z_samples, hist_samples = self.__load_legacy_nofz()
         # in the process we also set self.nzbins!
@@ -370,7 +372,7 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
         self.zmax = self.z_p.max()
         self.need_cosmo1_arguments(data, {'z_max_pk': self.zmax})
         # Technically not needed
-        # self.need_cosmo2_arguments(data, {'z_max_pk': self.zmax})
+        self.need_cosmo2_arguments(data, {'z_max_pk': self.zmax})
 
         # Initialize the BandPowers module from CosmoSIS:
         config_theory = {'cl2xi': {'corr_type': 0,
@@ -387,7 +389,6 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
                                             'cosmosis-standard-library/shear/cl_to_xi_nicaea/nicaea_interface.so'))
 
         self.theory_module.setup(dict_to_datablock(config_theory))
-
         return
 
     def loglkl(self, cosmo1, cosmo2, data):
