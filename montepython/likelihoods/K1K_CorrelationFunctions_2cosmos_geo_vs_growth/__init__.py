@@ -89,16 +89,17 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
 
         # Force the cosmological module to store Pk for redshifts up to
         # max(self.z) and for k up to k_max
+        # Technically we shouldn't need cosmo 2 to get Pk but might give a bug
         self.need_cosmo1_arguments(data, {'output': 'mPk', 'P_k_max_h/Mpc': self.k_max_h_by_Mpc})
-        self.need_cosmo2_arguments(data, {'output': 'mPk', 'P_k_max_h/Mpc': self.k_max_h_by_Mpc})
+        #self.need_cosmo2_arguments(data, {'output': 'mPk', 'P_k_max_h/Mpc': self.k_max_h_by_Mpc})
         self.need_cosmo1_arguments(data, {'nonlinear_min_k_max': self.nonlinear_min_k_max})
-        self.need_cosmo2_arguments(data, {'nonlinear_min_k_max': self.nonlinear_min_k_max})
+        #self.need_cosmo2_arguments(data, {'nonlinear_min_k_max': self.nonlinear_min_k_max})
 
         ## Compute non-linear power spectrum if requested
         # it seems like HMcode needs the full argument to work...
         if self.method_non_linear_Pk in ['halofit', 'HALOFIT', 'Halofit', 'hmcode', 'Hmcode', 'HMcode', 'HMCODE']:
             self.need_cosmo1_arguments(data, {'non linear': self.method_non_linear_Pk})
-            self.need_cosmo2_arguments(data, {'non linear': self.method_non_linear_Pk})
+            #self.need_cosmo2_arguments(data, {'non linear': self.method_non_linear_Pk})
             print('Using {:} to obtain the non-linear P(k, z)!'.format(self.method_non_linear_Pk))
         else:
             print('Only using the linear P(k, z) for ALL calculations \n (check keywords for "method_non_linear_Pk").')
@@ -368,7 +369,8 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
 
         self.zmax = self.z_p.max()
         self.need_cosmo1_arguments(data, {'z_max_pk': self.zmax})
-        self.need_cosmo2_arguments(data, {'z_max_pk': self.zmax})
+        # Technically not needed
+        # self.need_cosmo2_arguments(data, {'z_max_pk': self.zmax})
 
         # Initialize the BandPowers module from CosmoSIS:
         config_theory = {'cl2xi': {'corr_type': 0,
@@ -701,17 +703,18 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
             for idx_z, z in enumerate(self.z_p):
                 try:
                     # for CLASS ver >= 2.6:
-                    linear_growth_rate[idx_z] = cosmo.scale_independent_growth_factor(z)
+                    # Should have cosmo_pk here
+                    linear_growth_rate[idx_z] = cosmo_pk.scale_independent_growth_factor(z)
                 except:
                     # my own function from private CLASS modification:
-                    linear_growth_rate[idx_z] = cosmo.growth_factor_at_z(z)
+                    linear_growth_rate[idx_z] = cosmo_pk.growth_factor_at_z(z)
             # normalize to unity at z=0:
             try:
                 # for CLASS ver >= 2.6:
-                linear_growth_rate /= cosmo.scale_independent_growth_factor(0.)
+                linear_growth_rate /= cosmo_pk.scale_independent_growth_factor(0.)
             except:
                 # my own function from private CLASS modification:
-                linear_growth_rate /= cosmo.growth_factor_at_z(0.)
+                linear_growth_rate /= cosmo_pk.growth_factor_at_z(0.)
 
         g = self.get_lensing_kernel(r, pr)
         pk, pk_lin = self.get_matter_power_spectrum(r, self.z_p, cosmo_pk, data, cosmo_index=cosmo_index_pk)
@@ -843,7 +846,7 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
         #     theory_vec = np.zeros(0)
         return theory_vec
 
-    def cosmo_calculations(self, cosmo, cosmo_pk, data, cosmo_index=1, cosmo_index_pk=2):
+    def cosmo_calculations(self, cosmo, cosmo_pk, data, cosmo_index=2, cosmo_index_pk=1):
 
         Cls, Cl_keys = self.get_shear_power_spectrum(cosmo, cosmo_pk, data, cosmo_index=cosmo_index, cosmo_index_pk=cosmo_index_pk)
         theory_vec = self.get_theory_vec(Cls, Cl_keys, data, cosmo_index=cosmo_index)
