@@ -65,7 +65,7 @@ class CMB_features_2018(Likelihood):
                 if 'ln10^{10}A_s_1' in data.mcmc_parameters:
                     theo = data.mcmc_parameters['ln10^{10}A_s_1']['current']
                 else:
-                    theo = log(1.e10*cosmo2.get_A_s)
+                    theo = log(1.e10*cosmo1.get_A_s)
 
             elif self.data_type[counter] == 2:
                 theo = data.mcmc_parameters['n_s_1']['current']
