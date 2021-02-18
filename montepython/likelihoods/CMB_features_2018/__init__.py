@@ -3,7 +3,7 @@ import numpy as np
 from montepython.likelihood_class import Likelihood
 import montepython.io_mp as io_mp
 import warnings
-import math 
+import math
 from scipy import special
 from scipy.linalg import cholesky, solve_triangular
 
@@ -14,7 +14,7 @@ class CMB_features_2018(Likelihood):
     def __init__(self, path, data, command_line):
 
         Likelihood.__init__(self, path, data, command_line)
-	
+
 	#ZP: uncomment if run on its own
 	#self.need_cosmo1_arguments(data, {'output': 'mPk'})
         #self.need_cosmo1_arguments(data, {'P_k_max_h/Mpc': '1.'})
@@ -47,13 +47,13 @@ class CMB_features_2018(Likelihood):
     # compute likelihood
 
     def loglkl(self, cosmo1, cosmo2,  data):
-        #ZP: Being the position of the acoustic peak 
-        # a strong goemetry phenomenon, calculations 
-        #are done using cosmo2 as it is the one responsible to 
-        #parametrize goemetry. 
+        #ZP: Being the position of the acoustic peak
+        # a strong goemetry phenomenon, calculations
+        #are done using cosmo2 as it is the one responsible to
+        #parametrize goemetry.
 
-        #However, both cosmologies are called for matters 
-        #of consistency at the sampler 
+        #However, both cosmologies are called for matters
+        #of consistency at the sampler
 
         # for each point, compute angular distance da, radial distance dr,
         # volume distance dv, sound horizon at baryon drag rs_d,
@@ -65,20 +65,20 @@ class CMB_features_2018(Likelihood):
                 if 'ln10^{10}A_s_1' in data.mcmc_parameters:
                     theo = data.mcmc_parameters['ln10^{10}A_s_1']['current']
                 else:
-                    theo = log(1.e10*cosmo1.get_A_s)
+                    theo = cosmo1.get_current_derived_parameters(['ln10^{10}A_s'])['ln10^{10}A_s']
 
             elif self.data_type[counter] == 2:
                 theo = data.mcmc_parameters['n_s_1']['current']
 
             elif self.data_type[counter] == 3:
                 theo = cosmo2.theta_star_100()
-		
+
             else:
                 raise io_mp.LikelihoodError(
                     "In likelihood %s. " % self.name +
                     "BAO data type %s " % self.type[counter] +
                     "in %d-th line not understood" % counter)
-	     
+
             prediction = np.append(prediction, float(theo))
 
 	#print prediction
