@@ -608,17 +608,17 @@ class K1K_BandPowers_2cosmos_geo_vs_growth(Likelihood):
             for idx_z, z in enumerate(self.z_p):
                 try:
                     # for CLASS ver >= 2.6:
-                    linear_growth_rate[idx_z] = cosmo.scale_independent_growth_factor(z)
+                    linear_growth_rate[idx_z] = cosmo_pk.scale_independent_growth_factor(z)
                 except:
                     # my own function from private CLASS modification:
-                    linear_growth_rate[idx_z] = cosmo.growth_factor_at_z(z)
+                    linear_growth_rate[idx_z] = cosmo_pk.growth_factor_at_z(z)
             # normalize to unity at z=0:
             try:
                 # for CLASS ver >= 2.6:
-                linear_growth_rate /= cosmo.scale_independent_growth_factor(0.)
+                linear_growth_rate /= cosmo_pk.scale_independent_growth_factor(0.)
             except:
                 # my own function from private CLASS modification:
-                linear_growth_rate /= cosmo.growth_factor_at_z(0.)
+                linear_growth_rate /= cosmo_pk.growth_factor_at_z(0.)
 
         g = self.get_lensing_kernel(r, pr)
         pk, pk_lin = self.get_matter_power_spectrum(r, self.z_p, cosmo_pk, data, cosmo_index=cosmo_index_pk)
