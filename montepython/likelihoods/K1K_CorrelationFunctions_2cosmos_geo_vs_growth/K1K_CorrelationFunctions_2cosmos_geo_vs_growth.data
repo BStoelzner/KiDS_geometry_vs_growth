@@ -195,8 +195,7 @@ K1K_CorrelationFunctions_2cosmos_geo_vs_growth.use_linear_pk_for_IA = False
 # existent assumed to be located within 'data_directory'):
 # NOTE: if filename is not supplied or file cannot be loaded, we assume NO
 # correlations between the D_z<i>_1/2 shift parameters!
-K1K_CorrelationFunctions_2cosmos_geo_vs_growth.filename_corrmat_D_z_1 = 'SOM_cov_multiplied.asc'
-K1K_CorrelationFunctions_2cosmos_geo_vs_growth.filename_corrmat_D_z_2 = 'SOM_cov_multiplied.asc'
+K1K_CorrelationFunctions_2cosmos_geo_vs_growth.filename_corrmat_D_z = 'SOM_cov_multiplied.asc'
 
 ## FULL LIST OF ALL NUISANCES ##
 

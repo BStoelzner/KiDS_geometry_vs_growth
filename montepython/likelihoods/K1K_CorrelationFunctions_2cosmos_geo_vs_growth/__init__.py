@@ -105,7 +105,7 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
 
         # set up array of ells for Cl integrations:
         self.ells = np.logspace(np.log10(self.ell_min), np.log10(self.ell_max), self.nells)
-        
+
         self.config_xip_binned1 = {'xip_binned1': { 'output_section_name' : self.xip_output_section_name,
                                           'input_section_name' : self.xip_input_section_name,
                                           'type' : self.xip_type,
@@ -281,7 +281,7 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
         else:
             covmat = covmat_block1
         '''
-        
+
         # Read dn_dz from data FITS file:
         #z_samples, hist_samples = self.__load_legacy_nofz()
         # in the process we also set self.nzbins!
@@ -303,36 +303,36 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
         self.cholesky_transform = cholesky(covmat, lower=True)
 
         # Check if any of the n(z) needs to be shifted in loglkl by D_z{1...n}:
-        self.shift_n_z_by_D_z = np.zeros((2, self.nzbins), 'bool')
+        self.shift_n_z_by_D_z = np.zeros((1, self.nzbins), 'bool')
         for zbin in xrange(self.nzbins):
-            param_name = 'D_z{:}_1'.format(zbin + 1)
+            param_name = 'D_z{:}'.format(zbin + 1)
             if param_name in data.mcmc_parameters:
                 self.shift_n_z_by_D_z[0, zbin] = True
-            param_name = 'D_z{:}_2'.format(zbin + 1)
-            if param_name in data.mcmc_parameters:
-                self.shift_n_z_by_D_z[1, zbin] = True
+            # param_name = 'D_z{:}_2'.format(zbin + 1)
+            # if param_name in data.mcmc_parameters:
+            #     self.shift_n_z_by_D_z[1, zbin] = True
 
         if self.shift_n_z_by_D_z[0, :].any():
             # load the correlation matrix of the D_z shifts:
             try:
-                fname = os.path.join(self.data_directory, self.filename_corrmat_D_z_1)
-                corrmat_D_z_1 = np.loadtxt(fname)
+                fname = os.path.join(self.data_directory, self.filename_corrmat_D_z)
+                corrmat_D_z = np.loadtxt(fname)
                 print('Loaded correlation matrix for D_z<i>_1 shifts from: \n {:} \n'.format(fname))
-                self.L_matrix_D_z_1 = np.linalg.cholesky(corrmat_D_z_1)
+                self.L_matrix_D_z = np.linalg.cholesky(corrmat_D_z)
             except:
                 print('Could not load correlation matrix of D_z<i>_1 shifts, hence treating them as independent! \n')
-                self.L_matrix_D_z_1 = np.eye(self.nzbins)
+                self.L_matrix_D_z = np.eye(self.nzbins)
 
-        if self.shift_n_z_by_D_z[1, :].any():
-            # load the correlation matrix of the D_z shifts:
-            try:
-                fname = os.path.join(self.data_directory, self.filename_corrmat_D_z_2)
-                corrmat_D_z_2 = np.loadtxt(fname)
-                print('Loaded correlation matrix for D_z<i>_2 shifts from: \n {:} \n'.format(fname))
-                self.L_matrix_D_z_2 = np.linalg.cholesky(corrmat_D_z_2)
-            except:
-                print('Could not load correlation matrix of D_z<i>_2 shifts, hence treating them as independent! \n')
-                self.L_matrix_D_z_2 = np.eye(self.nzbins)
+        # if self.shift_n_z_by_D_z[1, :].any():
+        #     # load the correlation matrix of the D_z shifts:
+        #     try:
+        #         fname = os.path.join(self.data_directory, self.filename_corrmat_D_z_2)
+        #         corrmat_D_z_2 = np.loadtxt(fname)
+        #         print('Loaded correlation matrix for D_z<i>_2 shifts from: \n {:} \n'.format(fname))
+        #         self.L_matrix_D_z_2 = np.linalg.cholesky(corrmat_D_z_2)
+        #     except:
+        #         print('Could not load correlation matrix of D_z<i>_2 shifts, hence treating them as independent! \n')
+        #         self.L_matrix_D_z_2 = np.eye(self.nzbins)
 
         # prevent undersampling of histograms!
         if self.nzmax < len(self.z_samples) - 1:
@@ -660,12 +660,7 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
                 if param_name in data.mcmc_parameters:
                     D_z[zbin] = data.mcmc_parameters[param_name]['current'] * data.mcmc_parameters[param_name]['scale']
 
-            # a bit ugly...
-            if cosmo_index == 1:
-                D_z_corr = self.L_matrix_D_z_1.dot(D_z)
-
-            if cosmo_index == 2:
-                D_z_corr = self.L_matrix_D_z_2.dot(D_z)
+            D_z_corr = self.L_matrix_D_z_1.dot(D_z)
 
             pz = np.zeros((self.nzmax, self.nzbins), 'float64')
             pz_norm = np.zeros(self.nzbins, 'float64')
