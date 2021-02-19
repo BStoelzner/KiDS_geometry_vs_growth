@@ -660,7 +660,7 @@ class K1K_CorrelationFunctions_2cosmos_geo_vs_growth(Likelihood):
                 if param_name in data.mcmc_parameters:
                     D_z[zbin] = data.mcmc_parameters[param_name]['current'] * data.mcmc_parameters[param_name]['scale']
 
-            D_z_corr = self.L_matrix_D_z_1.dot(D_z)
+            D_z_corr = self.L_matrix_D_z.dot(D_z)
 
             pz = np.zeros((self.nzmax, self.nzbins), 'float64')
             pz_norm = np.zeros(self.nzbins, 'float64')
