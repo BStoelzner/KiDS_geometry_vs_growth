@@ -1,6 +1,7 @@
 #------Experiments to test (separated with commas)-----
 
-data.experiments=['K1K_CorrelationFunctions_2cosmos_geo_vs_growth', 'eBOSS_DR14_Lya_combined', 'CMB_features_2018']
+# data.experiments=['K1K_CorrelationFunctions_2cosmos_geo_vs_growth', 'eBOSS_DR14_Lya_combined', 'CMB_features_2018']
+data.experiments=['K1K_BandPowers_2cosmos_geo_vs_growth', 'eBOSS_DR14_Lya_combined', 'CMB_features_2018']
 
 #------ Settings for the over-sampling. The first element will always be set to
 # 1, for it is the sampling of the cosmological parameters. The other numbers
@@ -47,7 +48,8 @@ data.parameters['D_z3'] = [ 1.110,    -5., 5., 0.01, 1, 'nuisance', 'gaussian', 
 data.parameters['D_z4'] = [ 1.395,    -5., 5., 0.01, 1, 'nuisance', 'gaussian', 1.395, 1.0]
 data.parameters['D_z5'] = [ -1.265,  -5., 5., 0.01, 1, 'nuisance', 'gaussian', -1.265, 1.0]
 
-data.parameters['delta_c'] = [ 0,       -3.75e-7, 3.75e-7, 1e-8, 1, 'nuisance', 'gaussian', 0.0, 7.5e-8]
+# delta_c is only needed for 2PCFs
+# data.parameters['delta_c'] = [ 0,       -3.75e-7, 3.75e-7, 1e-8, 1, 'nuisance', 'gaussian', 0.0, 7.5e-8]
 
 # Derived parameters
 
