@@ -1,0 +1,141 @@
+#-----CLASS v2.9.3 (branch: b'master', hash: b'8f5ee16604bffa60c98032d33e81155bf64ab495')-----
+
+#------Experiments to test (separated with commas)-----
+
+data.experiments=['K1K_BandPowers', 'bao_boss', 'bao_fs_boss_dr12']
+
+#------ Settings for the over-sampling. The first element will always be set to
+# 1, for it is the sampling of the cosmological parameters. The other numbers
+# describe the over sampling of the nuisance parameter space. This array must
+# have the same dimension as the number of blocks in your run (so, 1 for
+# cosmological parameters, and then 1 for each experiment with varying nuisance
+# parameters).
+#data.over_sampling=[1, 4]
+
+#------ Parameter list -------
+
+# data.parameters[class name] = [mean, min, max, 1-sigma, scale, role]
+# - if min max irrelevant, put to -1
+# - if fixed, put 1-sigma to 0
+# - if scale irrelevant, put to 1, otherwise to the appropriate factor
+# - role is either 'cosmo' or 'nuisance'
+
+# Cosmological parameters list
+# main parameters to extract:
+
+data.parameters['omega_cdm']    = [0.1157,   0.051,  0.255,	0.0027,    1, 'cosmo']
+data.parameters['S_8'] 	        = [0.8128,   0.1,    1.3,       0.0029,    1, 'cosmo']
+data.parameters['omega_b']      = [0.0225,   0.019,  0.026, 	0.028,     1, 'cosmo']
+data.parameters['n_s']          = [0.969,    0.84,   1.1, 	0.0074,    1, 'cosmo']
+data.parameters['h']         	= [0.6898,   0.64,   0.82,   	0.0065,    1, 'cosmo']
+
+# Nuisance parameters:
+
+# amplitude for intrinsic alignments (IA):
+data.parameters['A_IA'] = [1.0,	   -6.0,    6.0,    1.0,    1, 'nuisance']
+
+# amplitude for baryon feedback with 'halofit':
+#data.parameters['A_bary'] = [0.75, 0.5, 1., 0.5, 1, 'nuisance']
+
+# parameters for baryon feedback with 'hmcode':
+data.parameters['c_min'] = [2.6,    2.,     3.13,    1.,     1, 'cosmo']
+
+### Delta-z parameters ###
+data.parameters['D_z1'] = [ 0.,       -5., 5., 0.01, 1, 'nuisance', 'gaussian', 0., 1.0]
+data.parameters['D_z2'] = [ 0.181,    -5., 5., 0.01, 1, 'nuisance', 'gaussian', 0.181, 1.0]
+data.parameters['D_z3'] = [ 1.110,    -5., 5., 0.01, 1, 'nuisance', 'gaussian', 1.110, 1.0]
+data.parameters['D_z4'] = [ 1.395,    -5., 5., 0.01, 1, 'nuisance', 'gaussian', 1.395, 1.0]
+data.parameters['D_z5'] = [ -1.265,  -5., 5., 0.01, 1, 'nuisance', 'gaussian', -1.265, 1.0]
+#data.parameters['D_z1'] = [ 0.,	      -5., 5., 0.01, 1, 'nuisance']
+#data.parameters['D_z2'] = [ 0.181,    -5., 5., 0.01, 1, 'nuisance']
+#data.parameters['D_z3'] = [ 1.110,    -5., 5., 0.01, 1, 'nuisance']
+#data.parameters['D_z4'] = [ 1.395,    -5., 5., 0.01, 1, 'nuisance']
+#data.parameters['D_z5'] = [ -1.265,  -5., 5., 0.01, 1, 'nuisance']
+
+# Derived parameters:
+data.parameters['Omega_m']      = [1, None, None, 0, 1, 'derived']  
+data.parameters['sigma8']       = [1, None, None, 0, 1, 'derived']  
+
+# Other cosmo parameters (fixed parameters, precision parameters, etc.)
+
+# fix main cosmology to Planck:
+data.cosmo_arguments['Omega_k'] = 0.
+
+# The base model features two massless
+# and one massive neutrino with m=0.06eV.
+# The settings below ensures that these
+# three species contribute equally
+# to the radiation density at large
+# redshift, with a total of Neff=3.046
+data.cosmo_arguments['N_eff'] = 2.0328
+data.cosmo_arguments['N_ncdm'] = 1
+data.cosmo_arguments['m_ncdm'] = 0.06
+data.cosmo_arguments['T_ncdm'] = 0.71611
+
+# standard BBN prediction of the primordial Helium abundance $Y_p$:
+data.cosmo_arguments['sBBN file'] = data.path['cosmo']+'/bbn/sBBN.dat'
+data.cosmo_arguments['k_pivot'] = 0.05
+
+# only needed for regular MCMC:
+data.write_step = 1
+
+
+#-----Likelihood-K1K_BandPowers-----
+K1K_BandPowers.data_directory = '/share/splinter/stolzner/kids/montepython_public/data/K1K/'
+K1K_BandPowers.kcap_directory = '/share/splinter/stolzner/kids/kcap2/'
+K1K_BandPowers.data_file = 'bp_KIDS1000_BlindC_with_m_bias_V1.0.0A_ugriZYJHKs_photoz_SG_mask_LF_svn_309c_2Dbins_v2_goldclasses_Flag_SOM_Fid.fits'
+K1K_BandPowers.theta_min = 0.5
+K1K_BandPowers.theta_max = 300.0
+K1K_BandPowers.ell_bin_min = 100.0
+K1K_BandPowers.ell_bin_max = 1500.0
+K1K_BandPowers.nbins = 8
+K1K_BandPowers.analytic = True
+K1K_BandPowers.response_function = 'tophat'
+K1K_BandPowers.apodise = True
+K1K_BandPowers.delta_x = 0.5
+K1K_BandPowers.write_out_theory = False
+K1K_BandPowers.theory_file = 'bandpowers_cosmo2.ascii'
+K1K_BandPowers.nzbins = 5
+K1K_BandPowers.nzmax = 120
+K1K_BandPowers.type_redshift_interp = 'cubic'
+K1K_BandPowers.keep_ang_PeeE = '99.5 1500.5'
+K1K_BandPowers.ell_min = 1.0
+K1K_BandPowers.ell_max = 10000.0
+K1K_BandPowers.nells = 50
+K1K_BandPowers.write_out_Cls = False
+K1K_BandPowers.method_non_linear_Pk = 'hmcode'
+K1K_BandPowers.k_max_h_by_Mpc = 20.0
+K1K_BandPowers.nonlinear_min_k_max = 20.0
+K1K_BandPowers.use_linear_pk_for_IA = False
+K1K_BandPowers.filename_corrmat_D_z = 'SOM_cov_multiplied.asc'
+K1K_BandPowers.use_nuisance = ['A_IA', 'D_z1', 'D_z2', 'D_z3', 'D_z4', 'D_z5']
+K1K_BandPowers.use_gaussian_prior_for_nuisance = False
+K1K_BandPowers.gaussian_prior_name = ['D_z1', 'D_z2', 'D_z3', 'D_z4', 'D_z5']
+K1K_BandPowers.gaussian_prior_center = [0.0, 0.181, 1.11, 1.395, -1.265]
+K1K_BandPowers.gaussian_prior_sigma = [1.0, 1.0, 1.0, 1.0, 1.0]
+
+
+#-----Likelihood-bao_boss-----
+bao_boss.data_directory = '/share/splinter/stolzner/kids/montepython_public/data'
+bao_boss.file = 'bao_2014.txt'
+bao_boss.exclude = []
+
+
+#-----Likelihood-bao_fs_boss_dr12-----
+bao_fs_boss_dr12.data_directory = '/share/splinter/stolzner/kids/montepython_public/data'
+bao_fs_boss_dr12.data_file = 'COMBINEDDR12_final_consensus_dM_Hz/final_consensus_results_dM_Hz_fsig.txt'
+bao_fs_boss_dr12.cov_file = 'COMBINEDDR12_final_consensus_dM_Hz/final_consensus_covtot_dM_Hz_fsig.txt'
+bao_fs_boss_dr12.rs_rescale = 1.0
+bao_fs_boss_dr12.rd_fid_in_Mpc = 147.78
+
+
+#-----------Cosmological-arguments---------
+data.cosmo_arguments.update({'Omega_k': 0.0, 'N_eff': 2.0328, 'N_ncdm': 1, 'm_ncdm': 0.06, 'T_ncdm': 0.71611, 'sBBN file': '/share/splinter/stolzner/class_public_py3/bbn/sBBN.dat', 'k_pivot': 0.05, 'output': ' mPk ', 'P_k_max_h/Mpc': 20.0, 'nonlinear_min_k_max': 20.0, 'non linear': ' hmcode ', 'z_max_pk': 5.925000000000001})
+
+
+#--------Default-Configuration------
+data.path['root']	= '/share/splinter/stolzner/kids/montepython_public'
+data.path['MontePython']	= '/share/splinter/stolzner/kids/montepython_public/montepython'
+data.path['data']	= '/share/splinter/stolzner/kids/montepython_public/data'
+data.path['cosmo']	= '/share/splinter/stolzner/class_public_py3'
+data.path['clik']	= '/share/splinter/stolzner/planck/code/plc_3.0/plc-3.01'
