@@ -1,7 +1,7 @@
 #------Experiments to test (separated with commas)-----
 
 # data.experiments=['K1K_CorrelationFunctions_2cosmos_geo_vs_growth', 'bao_boss', 'bao_fs_boss_dr12', 'eBOSS_DR14_Lya_combined', 'CMB_features_2018']
-data.experiments=['K1K_BandPowers_2cosmos_geo_vs_growth', 'bao_boss', 'bao_fs_boss_dr12', 'eBOSS_DR14_Lya_combined', 'CMB_features_2018']
+data.experiments=['K1K_BandPowers_2cosmos_geo_vs_growth', 'bao_boss', 'bao_fs_boss_dr12', 'eBOSS_DR16_Lya_combined', 'CMB_features_2018']
 
 #------ Settings for the over-sampling. The first element will always be set to
 # 1, for it is the sampling of the cosmological parameters. The other numbers

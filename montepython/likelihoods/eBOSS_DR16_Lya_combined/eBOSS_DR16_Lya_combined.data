@@ -1,0 +1,13 @@
+# This likelihood is from Cuceu, Farr, Lemos & Font-Ribera 2019 (1906.11628) and
+# is based on data from de Sainte Agathe et al. 2019 (1904.03400) and
+# Blomqvist et al. 2019 (1904.03430).
+# Written by James Farr (June 2019).
+
+eBOSS_DR16_Lya_combined.data_directory      = data.path['data']
+eBOSS_DR16_Lya_combined.cf_scan             = 'eBOSS_DR16_scans/duMasdesBourbouxetal2020/combined_stdFit/combined.ap.at.scan.dat'
+eBOSS_DR16_Lya_combined.rd_rescale          = 1.0
+
+eBOSS_DR16_Lya_combined.transverse_fid      = 39.2035356790606
+eBOSS_DR16_Lya_combined.parallel_fid        = 8.60106090298697
+eBOSS_DR16_Lya_combined.zeff                = 2.334
+
