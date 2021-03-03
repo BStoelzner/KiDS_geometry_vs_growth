@@ -1,0 +1,168 @@
+#-----CLASS v2.9.3 (branch: b'master', hash: b'8f5ee16604bffa60c98032d33e81155bf64ab495')-----
+
+#------Experiments to test (separated with commas)-----
+
+# data.experiments=['K1K_CorrelationFunctions_2cosmos_geo_vs_growth', 'bao_boss', 'bao_fs_boss_dr12', 'eBOSS_DR14_Lya_combined']
+data.experiments=['K1K_BandPowers_2cosmos_geo_vs_growth', 'bao_boss', 'bao_fs_boss_dr12', 'eBOSS_DR14_Lya_combined']
+
+#------ Settings for the over-sampling. The first element will always be set to
+# 1, for it is the sampling of the cosmological parameters. The other numbers
+# describe the over sampling of the nuisance parameter space. This array must
+# have the same dimension as the number of blocks in your run (so, 1 for
+# cosmological parameters, and then 1 for each experiment with varying nuisance
+# parameters).
+#data.over_sampling=[1, 1, 4]
+
+#------ Parameter list -------
+
+# data.parameters[class name] = [mean, min, max, 1-sigma, scale, role]
+# - if min max irrelevant, put to -1
+# - if fixed, put 1-sigma to 0
+# - if scale irrelevant, put to 1, otherwise to the appropriate factor
+# - role is either 'cosmo' or 'nuisance'
+
+# Cosmological parameters list
+# main parameters to extract:
+
+data.parameters['omega_cdm_1']    = [0.1157,  0.051,  0.255, 0.0027,    1, 'cosmo1']
+data.parameters['S_8_1']          = [0.8128,  0.1,    1.3,   0.0029,    1, 'cosmo1']
+data.parameters['omega_b_1']      = [0.0225,  0.019,  0.026, 0.028,     1, 'cosmo1']
+data.parameters['n_s_1']          = [0.969,   0.84,   1.1,   0.0074,    1, 'cosmo1']
+data.parameters['h_1']         	  = [0.6898,  0.64,   0.82,  0.0065,    1, 'cosmo1']
+data.parameters['omega_cdm_2']    = [0.1157,  0.051,  0.255, 0.0027,    1, 'cosmo2']
+data.parameters['S_8_2']          = [0.8128,  0.1,    1.3,   0.0029,    1, 'cosmo2']
+data.parameters['omega_b_2']      = [0.0225,  0.019,  0.026, 0.028,     1, 'cosmo2']
+data.parameters['n_s_2']          = [0.969,   0.84,   1.1,   0.0074,    1, 'cosmo2']
+data.parameters['h_2']         	  = [0.6898,  0.64,   0.82,  0.0065,    1, 'cosmo2']
+
+# Nuisance parameters:
+
+# amplitude for IA:
+data.parameters['A_IA'] = [1.0, -6.0, 6.0, 1.0, 1, 'nuisance']
+
+# parameters for baryon feedback with 'hmcode':
+data.parameters['c_min']   = [2.6,    2.,     3.13,    1.,     1, 'cosmo_shared']
+
+### Delta-z parameters ### 
+data.parameters['D_z1'] = [ 0.,       -5., 5., 0.01, 1, 'nuisance', 'gaussian', 0., 1.0]
+data.parameters['D_z2'] = [ 0.181,    -5., 5., 0.01, 1, 'nuisance', 'gaussian', 0.181, 1.0]
+data.parameters['D_z3'] = [ 1.110,    -5., 5., 0.01, 1, 'nuisance', 'gaussian', 1.110, 1.0]
+data.parameters['D_z4'] = [ 1.395,    -5., 5., 0.01, 1, 'nuisance', 'gaussian', 1.395, 1.0]
+data.parameters['D_z5'] = [ -1.265,  -5., 5., 0.01, 1, 'nuisance', 'gaussian', -1.265, 1.0]
+
+# delta_c is only needed for 2PCFs
+# data.parameters['delta_c'] = [ 0,       -3.75e-7, 3.75e-7, 1e-8, 1, 'nuisance', 'gaussian', 0.0, 7.5e-8]
+
+# Derived parameters
+
+data.parameters['Omega_m_1']      = [1, None, None, 0, 1, 'derived']  
+data.parameters['sigma8_1']       = [1, None, None, 0, 1, 'derived']  
+data.parameters['Omega_m_2']      = [1, None, None, 0, 1, 'derived']  
+data.parameters['sigma8_2']       = [1, None, None, 0, 1, 'derived']  
+
+# Other cosmo parameters (fixed parameters, precision parameters, etc.)
+
+# fix main cosmology to Planck:
+data.cosmo1_arguments['Omega_k'] = 0.
+data.cosmo2_arguments['Omega_k'] = 0.
+
+# The base model features two massless
+# and one massive neutrino with m=0.06eV.
+# The settings below ensures that these
+# three species contribute equally
+# to the radiation density at large
+# redshift, with a total of Neff=3.046
+#data.cosmo_arguments['N_eff'] = 3.046
+data.cosmo1_arguments['N_eff'] = 2.0328
+data.cosmo1_arguments['N_ncdm'] = 1
+data.cosmo1_arguments['m_ncdm'] = 0.06
+data.cosmo1_arguments['T_ncdm'] = 0.71611
+data.cosmo2_arguments['N_eff'] = 2.0328
+data.cosmo2_arguments['N_ncdm'] = 1
+data.cosmo2_arguments['m_ncdm'] = 0.06
+data.cosmo2_arguments['T_ncdm'] = 0.71611
+
+# standard BBN prediction of the primordial Helium abundance $Y_p$:
+data.cosmo1_arguments['sBBN file'] = data.path['cosmo']+'/bbn/sBBN.dat'
+data.cosmo1_arguments['k_pivot'] = 0.05
+data.cosmo2_arguments['sBBN file'] = data.path['cosmo']+'/bbn/sBBN.dat'
+data.cosmo2_arguments['k_pivot'] = 0.05
+
+# only needed for regular MCMC:
+data.write_step = 1
+
+
+#-----Likelihood-K1K_BandPowers_2cosmos_geo_vs_growth-----
+K1K_BandPowers_2cosmos_geo_vs_growth.data_directory = '/share/splinter/stolzner/kids/montepython_public/data/K1K/'
+K1K_BandPowers_2cosmos_geo_vs_growth.kcap_directory = '/share/splinter/stolzner/kids/kcap2'
+K1K_BandPowers_2cosmos_geo_vs_growth.data_file = 'bp_KIDS1000_BlindC_with_m_bias_V1.0.0A_ugriZYJHKs_photoz_SG_mask_LF_svn_309c_2Dbins_v2_goldclasses_Flag_SOM_Fid.fits'
+K1K_BandPowers_2cosmos_geo_vs_growth.theta_min = 0.5
+K1K_BandPowers_2cosmos_geo_vs_growth.theta_max = 300.0
+K1K_BandPowers_2cosmos_geo_vs_growth.ell_bin_min = 100.0
+K1K_BandPowers_2cosmos_geo_vs_growth.ell_bin_max = 1500.0
+K1K_BandPowers_2cosmos_geo_vs_growth.nbins = 8
+K1K_BandPowers_2cosmos_geo_vs_growth.analytic = True
+K1K_BandPowers_2cosmos_geo_vs_growth.response_function = 'tophat'
+K1K_BandPowers_2cosmos_geo_vs_growth.apodise = True
+K1K_BandPowers_2cosmos_geo_vs_growth.delta_x = 0.5
+K1K_BandPowers_2cosmos_geo_vs_growth.write_out_theory = False
+K1K_BandPowers_2cosmos_geo_vs_growth.theory_file_prefix = 'bf_bandpowers'
+K1K_BandPowers_2cosmos_geo_vs_growth.nzbins = 5
+K1K_BandPowers_2cosmos_geo_vs_growth.nzmax = 120
+K1K_BandPowers_2cosmos_geo_vs_growth.type_redshift_interp = 'cubic'
+K1K_BandPowers_2cosmos_geo_vs_growth.keep_ang_PeeE1 = '99.5 1500.5'
+K1K_BandPowers_2cosmos_geo_vs_growth.keep_ang_PeeE2 = '99.5 1500.5'
+K1K_BandPowers_2cosmos_geo_vs_growth.ell_min = 1.0
+K1K_BandPowers_2cosmos_geo_vs_growth.ell_max = 10000.0
+K1K_BandPowers_2cosmos_geo_vs_growth.nells = 50
+K1K_BandPowers_2cosmos_geo_vs_growth.write_out_Cls = False
+K1K_BandPowers_2cosmos_geo_vs_growth.method_non_linear_Pk = 'hmcode'
+K1K_BandPowers_2cosmos_geo_vs_growth.k_max_h_by_Mpc = 20.0
+K1K_BandPowers_2cosmos_geo_vs_growth.nonlinear_min_k_max = 20.0
+K1K_BandPowers_2cosmos_geo_vs_growth.use_linear_pk_for_IA = False
+K1K_BandPowers_2cosmos_geo_vs_growth.filename_corrmat_D_z = 'SOM_cov_multiplied.asc'
+K1K_BandPowers_2cosmos_geo_vs_growth.use_nuisance = ['A_IA', 'D_z1', 'D_z2', 'D_z3', 'D_z4', 'D_z5']
+K1K_BandPowers_2cosmos_geo_vs_growth.use_gaussian_prior_for_nuisance = False
+K1K_BandPowers_2cosmos_geo_vs_growth.gaussian_prior_name = ['D_z1_1', 'D_z2_1', 'D_z3_1', 'D_z4_1', 'D_z5_1', 'D_z1_2', 'D_z2_2', 'D_z3_2', 'D_z4_2', 'D_z5_2']
+K1K_BandPowers_2cosmos_geo_vs_growth.gaussian_prior_center = [0.0, 0.181, 1.11, 1.359, -1.265, 0.0, 0.181, 1.11, 1.395, -1.265]
+K1K_BandPowers_2cosmos_geo_vs_growth.gaussian_prior_sigma = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+
+
+#-----Likelihood-bao_boss-----
+bao_boss.data_directory = '/share/splinter/stolzner/kids/montepython_gro/data'
+bao_boss.file = 'bao_2014.txt'
+bao_boss.exclude = []
+
+
+#-----Likelihood-bao_fs_boss_dr12-----
+bao_fs_boss_dr12.data_directory = '/share/splinter/stolzner/kids/montepython_gro/data'
+bao_fs_boss_dr12.data_file = 'COMBINEDDR12_final_consensus_dM_Hz/final_consensus_results_dM_Hz_fsig.txt'
+bao_fs_boss_dr12.cov_file = 'COMBINEDDR12_final_consensus_dM_Hz/final_consensus_covtot_dM_Hz_fsig.txt'
+bao_fs_boss_dr12.rs_rescale = 1.0
+bao_fs_boss_dr12.rd_fid_in_Mpc = 147.78
+bao_fs_boss_dr12.k_max = 1.0
+
+
+#-----Likelihood-eBOSS_DR14_Lya_combined-----
+eBOSS_DR14_Lya_combined.data_directory = '/share/splinter/stolzner/kids/montepython_gro/data'
+eBOSS_DR14_Lya_combined.file = 'eBOSS_DR14_scans/eBOSS_DR14_scan_aux.txt'
+eBOSS_DR14_Lya_combined.cf_scan = 'eBOSS_DR14_scans/eBOSS_DR14_Lya_combined_scan.dat'
+eBOSS_DR14_Lya_combined.rd_rescale = 1.0
+eBOSS_DR14_Lya_combined.transverse_fid = 39.26
+eBOSS_DR14_Lya_combined.parallel_fid = 8.581
+
+
+#-----------Cosmological-arguments1---------
+data.cosmo1_arguments.update({'Omega_k': 0.0, 'N_eff': 2.0328, 'N_ncdm': 1, 'm_ncdm': 0.06, 'T_ncdm': 0.71611, 'sBBN file': '/share/splinter/stolzner/class_public_py3/bbn/sBBN.dat', 'k_pivot': 0.05, 'output': ' mPk ', 'P_k_max_h/Mpc': 20.0, 'nonlinear_min_k_max': 20.0, 'non linear': ' hmcode ', 'z_max_pk': 5.925000000000001})
+
+
+#-----------Cosmological-arguments2---------
+data.cosmo2_arguments.update({'Omega_k': 0.0, 'N_eff': 2.0328, 'N_ncdm': 1, 'm_ncdm': 0.06, 'T_ncdm': 0.71611, 'sBBN file': '/share/splinter/stolzner/class_public_py3/bbn/sBBN.dat', 'k_pivot': 0.05, 'output': ' mPk ', 'P_k_max_h/Mpc': 20.0, 'nonlinear_min_k_max': 20.0, 'non linear': ' hmcode ', 'z_max_pk': 5.925000000000001})
+
+
+#--------Default-Configuration------
+data.path['root']	= '/share/splinter/stolzner/kids/montepython_gro'
+data.path['MontePython']	= '/share/splinter/stolzner/kids/montepython_gro/montepython'
+data.path['data']	= '/share/splinter/stolzner/kids/montepython_gro/data'
+data.path['cosmo']	= '/share/splinter/stolzner/class_public_py3'
+data.path['clik']	= '/share/splinter/stolzner/planck/plc-2.0'
