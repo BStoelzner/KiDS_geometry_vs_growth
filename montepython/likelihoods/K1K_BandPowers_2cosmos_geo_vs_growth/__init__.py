@@ -320,7 +320,7 @@ class K1K_BandPowers_2cosmos_geo_vs_growth(Likelihood):
             exit()
 
         diff_vec = self.data_vec - theory_vec
-
+        
         # Don't invert that matrix!
         #chi2 = difference_vector.T.dot(inv_cov_sliced.dot(difference_vector))
         # this is for running smoothly with MultiNest
@@ -365,7 +365,7 @@ class K1K_BandPowers_2cosmos_geo_vs_growth(Likelihood):
         # by the scale_cuts module:
 
         # read number of NZ_SOURCE bins from HEADER
-        # This does not seem to work and was a lucky hit...
+        #.parameters['c_min']   = [3.021859,    2.,     3.13,    1.,     1, 'cosmo_shared'] This does not seem to work and was a lucky hit...
         #self.nzbins = int(data_tables[2].header['N_ZBIN_1'])
         # define also number of unique z-bin correlations:
         self.nzcorrs = self.nzbins * (self.nzbins + 1) // 2
@@ -536,8 +536,8 @@ class K1K_BandPowers_2cosmos_geo_vs_growth(Likelihood):
         small_h = cosmo.h()
 
         # needed for IA modelling:
-        param_name1 = 'A_IA_{:}'.format(cosmo_index)
-        param_name2 = 'exp_IA_{:}'.format(cosmo_index)
+        param_name1 = 'A_IA'
+        param_name2 = 'exp_IA'
         if (param_name1 in data.mcmc_parameters) and (param_name2 in data.mcmc_parameters):
             amp_IA = data.mcmc_parameters[param_name1]['current'] * data.mcmc_parameters[param_name1]['scale']
             exp_IA = data.mcmc_parameters[param_name2]['current'] * data.mcmc_parameters[param_name2]['scale']
@@ -738,7 +738,7 @@ class K1K_BandPowers_2cosmos_geo_vs_growth(Likelihood):
 
         Cls, Cl_keys = self.get_shear_power_spectrum(cosmo, cosmo_pk, data, cosmo_index=cosmo_index, cosmo_index_pk=cosmo_index_pk)
         theory_vec = self.get_theory_vec(Cls, Cl_keys, data, cosmo_index=cosmo_index)
-
+        
         return theory_vec
 
     def __one_dim_index(self, Bin1, Bin2):
