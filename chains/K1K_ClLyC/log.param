@@ -123,9 +123,9 @@ K1K_BandPowers_2cosmos_geo_vs_growth.use_linear_pk_for_IA = False
 K1K_BandPowers_2cosmos_geo_vs_growth.filename_corrmat_D_z = 'SOM_cov_multiplied.asc'
 K1K_BandPowers_2cosmos_geo_vs_growth.use_nuisance = ['A_IA', 'D_z1', 'D_z2', 'D_z3', 'D_z4', 'D_z5']
 K1K_BandPowers_2cosmos_geo_vs_growth.use_gaussian_prior_for_nuisance = False
-K1K_BandPowers_2cosmos_geo_vs_growth.gaussian_prior_name = ['D_z1_1', 'D_z2_1', 'D_z3_1', 'D_z4_1', 'D_z5_1', 'D_z1_2', 'D_z2_2', 'D_z3_2', 'D_z4_2', 'D_z5_2']
-K1K_BandPowers_2cosmos_geo_vs_growth.gaussian_prior_center = [0.0, 0.181, 1.11, 1.359, -1.265, 0.0, 0.181, 1.11, 1.395, -1.265]
-K1K_BandPowers_2cosmos_geo_vs_growth.gaussian_prior_sigma = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+K1K_BandPowers_2cosmos_geo_vs_growth.gaussian_prior_name = ['D_z1', 'D_z2', 'D_z3', 'D_z4', 'D_z5']
+K1K_BandPowers_2cosmos_geo_vs_growth.gaussian_prior_center = [0.0, 0.181, 1.11, 1.359, -1.265]
+K1K_BandPowers_2cosmos_geo_vs_growth.gaussian_prior_sigma = [1.0, 1.0, 1.0, 1.0, 1.0]
 
 
 #-----Likelihood-bao_boss-----

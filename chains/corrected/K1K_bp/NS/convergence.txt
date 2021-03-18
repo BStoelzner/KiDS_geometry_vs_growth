@@ -1,2 +1,0 @@
-The sampling with MultiNest is done.
-You can now analyse the output calling Monte Python with the -info flag in the chain_name/NS subfolder, or, if you used multimodal sampling, in the chain_name/mode_# subfolders.
