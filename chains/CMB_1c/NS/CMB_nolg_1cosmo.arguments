@@ -1,0 +1,10 @@
+verbose = True
+evidence_tolerance = 0.1
+sampling_efficiency = 0.3
+max_iter = 10000000
+outputfiles_basename = /share/splinter/ug19_jrz/paper_results/1COSMOS/CMB_nolg_1cosmo/NS/CMB_nolg_1cosmo-
+n_live_points = 1000
+multimodal = False
+n_params = 7
+n_dims = 5
+init_MPI = False
