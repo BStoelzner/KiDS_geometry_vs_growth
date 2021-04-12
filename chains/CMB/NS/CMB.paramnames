@@ -6,4 +6,5 @@ h
 Omega_m
 sigma8
 100*theta_s
+100*theta_star
 ln10^{10}A_s
