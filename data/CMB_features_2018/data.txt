@@ -3,10 +3,10 @@
 # possibilities above
 #
 # ln(10^10A_s) Planck 2018. 1807.06209
-ln(10^10A_s)   3.045    1
+ln(10^10A_s)   3.044804    1
 #
 # ns, Planck 2018. 1807.06209
-ns    0.9649    2
+ns    0.9655698   2
 #
 # CMB Shift Parameter R, Ruiz and Huterer 1410.5832
-theta 1.0409    3
+theta  1.041087    3
