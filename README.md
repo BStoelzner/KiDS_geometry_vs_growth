@@ -1,4 +1,4 @@
-#KiDS-1000: Geometry versus growth
+# KiDS-1000: Geometry versus growth
 
 This repository contains chains and code used in arXiv:XXXX.YYYYY.
 
