@@ -1,6 +1,6 @@
 # KiDS-1000: Geometry versus growth
 
-This repository contains chains and code used in arXiv:XXXX.YYYYY.
+This repository contains chains and code used in arXiv:2105.09545.
 
 ### Contents
 - **analysis:** Scripts that reproduce the plots in the paper 
